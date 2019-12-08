@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+}
+
+.SpiralGrid {
+  display: inline;
+}
+
+.Square {
+  position: relative;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  background-color: rgb(69, 0, 71);
+  border-radius: 3px;
+  border: 3px;
+  color: rgb(240, 240, 240);
+  font-size: xx-small;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
