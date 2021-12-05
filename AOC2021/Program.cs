@@ -1,31 +1,32 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System.Reflection;
+// See https://aka.ms/new-console-template for more information
 // Importing file
 Console.WriteLine("Advent of Code is Upon Us!");
 
-AocDayFactory factory = null;
+AocDayFactory factory;
 
-Console.Write("Input AOC Day to run: ");
-string inputDay = Console.ReadLine();
-switch (inputDay)
+//Console.Write("Input AOC Day to run: ");
+//var inputDay = Console.ReadLine();
+var inputDay = "3";
+
+string inputDayStr = "1";
+if(inputDay == null)
 {
-    case "1":
-        factory = new Day3Factory();
-        break;
-    case "2":
-        factory = new Day2Factory();
-        break;
-    case "3":
-        factory = new Day3Factory();
-        break;
-    case "4":
-        factory = new Day4Factory();
-        break;
-    default:
-        break;
+    throw new Exception("No day detected in the input vale.");
+} else 
+{
+    inputDayStr = inputDay;
 }
 
+string factoryTypeName = "Day" + inputDayStr + "Factory";
+Type factoryType = Type.GetType(factoryTypeName) ?? throw new Exception ("Type " + factoryTypeName + " was not found");
+var constructorInfo = factoryType.GetConstructor(BindingFlags.Public | BindingFlags.Instance, Type.EmptyTypes);
+
+factory = (AocDayFactory)constructorInfo!.Invoke(null);
+
 AocDay aocDay = factory.GetAocDay();
-aocDay.RunPartA();
+//aocDay.RunPartA();
+aocDay.RunPartB();
 
 abstract class AocDay
 {
