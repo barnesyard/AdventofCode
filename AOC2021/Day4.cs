@@ -23,7 +23,7 @@ class Day4 : AocDay
 
     public Day4()
     {
-        this.input = System.IO.File.ReadAllLines(@"E:\OneDrive\Code Projects\AdventOfCode\AOC2021\input\Day4A_Input.txt");
+        this.input = System.IO.File.ReadAllLines(@".\input\Day4A_Input.txt");
         calledNumbers = (this.input[0].Split(',').Select(x => int.Parse(x))).ToArray<int>();
 
         int[,] card = new int[5, 5];
@@ -31,8 +31,9 @@ class Day4 : AocDay
         for (int i = 2; i < this.input.Length; i++)
         {
             int j = 0;
-            foreach (string s in this.input[i].Split(" ", 5))
+            foreach (string s in this.input[i].Split(" "))
             {
+                if(String.IsNullOrEmpty(s)) {continue;}
                 card[cardRow, j] = int.Parse(s);
                 j++;
             }
