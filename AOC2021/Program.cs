@@ -25,8 +25,8 @@ var constructorInfo = factoryType.GetConstructor(BindingFlags.Public | BindingFl
 factory = (AocDayFactory)constructorInfo!.Invoke(null);
 
 AocDay aocDay = factory.GetAocDay();
-//aocDay.RunPartA();
-aocDay.RunPartB();
+aocDay.RunPartA();
+//aocDay.RunPartB();
 
 abstract class AocDay
 {
