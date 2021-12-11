@@ -89,7 +89,7 @@ class Day4 : AocDay
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if(!this.called[i,j]) {sum += this.card[i, j];}
+                    if (!this.called[i, j]) { sum += this.card[i, j]; }
                 }
             }
             return sum;
@@ -126,6 +126,7 @@ class Day4 : AocDay
                 cardRow++;
             }
         }
+        Console.WriteLine(this.BingoCards.Count + " bingo cards added!");
 
     }
 
@@ -135,9 +136,10 @@ class Day4 : AocDay
         Console.WriteLine("Let's start calling numbers!");
 
         int numCalled = 0;
+        Console.Write("Numbers drawn: ");
         foreach (int called in this.calledNumbers)
         {
-            Console.WriteLine("Number drawn: " + called);
+            Console.Write(called + ", ");
 
             // check all the bingo cards to see if they contained the called number
             foreach (BingoCard card in this.BingoCards)
@@ -153,6 +155,7 @@ class Day4 : AocDay
                     int cardSum = card.sumCardValues();
                     Console.WriteLine("Sum of all card numbers not called: " + cardSum);
                     Console.WriteLine("Winning board score: " + (cardSum) + " x " + called + " = " + (cardSum * called));
+                    Environment.Exit(0);
                 }
             }
             numCalled++;
