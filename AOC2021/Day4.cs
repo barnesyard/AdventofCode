@@ -8,6 +8,14 @@ class Day4 : AocDay
     {
         private int[,] card = new int[5, 5];
         private bool[,] called = new bool[5, 5];
+        private bool hasBingo = false;
+        public bool HasBingo
+        { 
+            get
+            {
+                return this.hasBingo;
+            }
+        }
 
         public BingoCard(int[,] card)
         {
@@ -37,49 +45,45 @@ class Day4 : AocDay
             }
         }
 
-        public int weHaveBingo()
+        public bool weHaveBingo()
         {
-            int[] rowCovered = { 0, 0 };
-            int[] colCovered = { 0, 0 };
-            int[] diagLRCovered = { 0, 0 };
-            int[] diagRLCovered = { 0, 0 };
+            int rowCovered = 0;
+            int colCovered = 0;
+            int diagLRCovered = 0;
+            int diagRLCovered = 0;
             for (int i = 0; i < 5; i++)
             {
-                Array.Clear(rowCovered);
-                Array.Clear(colCovered);
+                rowCovered = 0;
+                colCovered = 0;
                 // do we have a diagonal of called numbers?
                 if (true == this.called[i, i])
                 {
-                    diagLRCovered[0]++;
-                    diagLRCovered[1] += this.card[i, i];
-                    if (5 == diagLRCovered[0]) { return diagLRCovered[1]; }
+                    diagLRCovered++;
+                    if (5 == diagLRCovered) { this.hasBingo = true; return true; }
                 }
                 if (true == this.called[i, 4 - i])
                 {
-                    diagRLCovered[0]++;
-                    diagRLCovered[1] += this.card[i, 4 - i];
-                    if (5 == diagRLCovered[0]) { return diagRLCovered[1]; }
+                    diagRLCovered++;
+                    if (5 == diagRLCovered) { this.hasBingo = true; return true; }
                 }
                 for (int j = 0; j < 5; j++)
                 {
                     // do we have a row of called numbers for this bingo card?
                     if (true == this.called[i, j])
                     {
-                        rowCovered[0]++;
-                        rowCovered[1] += this.card[i, j];
-                        if (5 == rowCovered[0]) { return rowCovered[1]; }
+                        rowCovered++;
+                        if (5 == rowCovered) { this.hasBingo = true; return true; }
                     }
                     // do we have a column of called numbers?
                     if (true == this.called[j, i])
                     {
-                        colCovered[0]++;
-                        colCovered[1] += this.card[j, i];
-                        if (5 == colCovered[0]) { return colCovered[1]; }
+                        colCovered++;
+                        if (5 == colCovered) { this.hasBingo = true; return true; }
                     }
                 }
 
             }
-            return 0;
+            return false;
         }
 
         public int sumCardValues()
@@ -136,30 +140,36 @@ class Day4 : AocDay
         Console.WriteLine("Let's start calling numbers!");
 
         int numCalled = 0;
+        List<int> winningCards = new List<int> {};
+        List<int> winningNumbers = new List<int> {};
         Console.Write("Numbers drawn: ");
         foreach (int called in this.calledNumbers)
         {
-            Console.Write(called + ", ");
+            Console.Write(" " + called);
 
             // check all the bingo cards to see if they contained the called number
-            foreach (BingoCard card in this.BingoCards)
+            for (int b=0; b<this.BingoCards.Count; b++)
             {
+                BingoCard card = this.BingoCards[b];
                 // check to see if the number called is on the card and note it if it was called
                 card.numberCalled(called);
                 //after calling 5 numbers we may have a bingo so we should check for a bingo
                 if (numCalled < 5) { continue; }
-                int bingoSum = card.weHaveBingo();
-                if (bingoSum > 0)
+                if (!card.HasBingo && card.weHaveBingo())
                 {
-                    Console.WriteLine("We have a bingo! Sum of bingo values!");
+                    Console.WriteLine("\nWe have a bingo! Card #" + b);
                     int cardSum = card.sumCardValues();
                     Console.WriteLine("Sum of all card numbers not called: " + cardSum);
                     Console.WriteLine("Winning board score: " + (cardSum) + " x " + called + " = " + (cardSum * called));
-                    Environment.Exit(0);
+                    //Environment.Exit(0);
+
+                    winningCards.Add(b);
+                    winningNumbers.Add(called);
                 }
             }
             numCalled++;
         }
+
     }
     public override void RunPartB()
     {
