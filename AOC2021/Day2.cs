@@ -3,7 +3,7 @@ class Day2 : AocDay
     public override void RunPartA()
     {
         Console.WriteLine("Running Day 2 part A");
-        string[] input = System.IO.File.ReadAllLines(@"E:\OneDrive\Code Projects\AdventOfCode\AOC2021\input\Day2A_Input.txt");
+        string[] input = System.IO.File.ReadAllLines(@"E:\OneDrive\Code Projects\AdventOfCode\AOC2021\input\Day2_Input.txt");
      
         int horizPos = 0;
         int depth = 0;
@@ -34,7 +34,7 @@ class Day2 : AocDay
     {
         Console.WriteLine("Running Day 2 part B");
         Console.WriteLine("Running Day 2 part A");
-        string[] input = System.IO.File.ReadAllLines(@"E:\OneDrive\Code Projects\AdventOfCode\AOC2021\input\Day2A_Input.txt");
+        string[] input = System.IO.File.ReadAllLines(@"E:\OneDrive\Code Projects\AdventOfCode\AOC2021\input\Day2_Input.txt");
      
         int horizPos = 0;
         int depth = 0;

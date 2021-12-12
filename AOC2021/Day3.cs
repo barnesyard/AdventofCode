@@ -6,7 +6,7 @@ class Day3 : AocDay
 
     public Day3()
     {
-        this.input = System.IO.File.ReadAllLines(@"E:\OneDrive\Code Projects\AdventOfCode\AOC2021\input\Day3A_Input.txt");
+        this.input = System.IO.File.ReadAllLines(@"E:\OneDrive\Code Projects\AdventOfCode\AOC2021\input\Day3_Input.txt");
     }
 
     public override void RunPartA()

@@ -105,7 +105,7 @@ class Day4 : AocDay
 
     public Day4()
     {
-        this.input = System.IO.File.ReadAllLines(@".\input\Day4A_Input.txt");
+        this.input = System.IO.File.ReadAllLines(@".\input\Day4_Input.txt");
         Console.WriteLine("Storing all the called numbers.");
         calledNumbers = (this.input[0].Split(',').Select(x => int.Parse(x))).ToArray<int>();
 
