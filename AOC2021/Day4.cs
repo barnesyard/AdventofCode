@@ -8,9 +8,11 @@ class Day4 : AocDay
     {
         private int[,] card = new int[5, 5];
         private bool[,] called = new bool[5, 5];
+
+        // Since I want to find the last card that has a bingo I will skip cards that have had at least 1 bingo
         private bool hasBingo = false;
         public bool HasBingo
-        { 
+        {
             get
             {
                 return this.hasBingo;
@@ -40,6 +42,7 @@ class Day4 : AocDay
                     if (num == this.card[i, j])
                     {
                         this.called[i, j] = true;
+                        return;
                     }
                 }
             }
@@ -49,23 +52,23 @@ class Day4 : AocDay
         {
             int rowCovered = 0;
             int colCovered = 0;
-            int diagLRCovered = 0;
-            int diagRLCovered = 0;
+            //int diagLRCovered = 0;
+            //int diagRLCovered = 0;
             for (int i = 0; i < 5; i++)
             {
                 rowCovered = 0;
                 colCovered = 0;
-                // do we have a diagonal of called numbers?
-                if (true == this.called[i, i])
-                {
-                    diagLRCovered++;
-                    if (5 == diagLRCovered) { this.hasBingo = true; return true; }
-                }
-                if (true == this.called[i, 4 - i])
-                {
-                    diagRLCovered++;
-                    if (5 == diagRLCovered) { this.hasBingo = true; return true; }
-                }
+                // do we have a diagonal of called numbers? doesn't matter, diaganols don't count
+                //if (true == this.called[i, i])
+                //{
+                //    diagLRCovered++;
+                //    if (5 == diagLRCovered) { this.hasBingo = true; return true; }
+                //}
+                //if (true == this.called[i, 4 - i])
+                //{
+                //    diagRLCovered++;
+                //    if (5 == diagRLCovered) { this.hasBingo = true; return true; }
+                //}
                 for (int j = 0; j < 5; j++)
                 {
                     // do we have a row of called numbers for this bingo card?
@@ -140,28 +143,29 @@ class Day4 : AocDay
         Console.WriteLine("Let's start calling numbers!");
 
         int numCalled = 0;
-        List<int> winningCards = new List<int> {};
-        List<int> winningNumbers = new List<int> {};
+        List<int> winningCards = new List<int> { };
+        List<int> winningNumbers = new List<int> { };
         Console.Write("Numbers drawn: ");
         foreach (int called in this.calledNumbers)
         {
             Console.Write(" " + called);
 
             // check all the bingo cards to see if they contained the called number
-            for (int b=0; b<this.BingoCards.Count; b++)
+            for (int b = 0; b < this.BingoCards.Count; b++)
             {
                 BingoCard card = this.BingoCards[b];
                 // check to see if the number called is on the card and note it if it was called
                 card.numberCalled(called);
                 //after calling 5 numbers we may have a bingo so we should check for a bingo
                 if (numCalled < 5) { continue; }
+
+                // if the card has had 1 bingo already we don't need to check to see if it has bingo again
                 if (!card.HasBingo && card.weHaveBingo())
                 {
                     Console.WriteLine("\nWe have a bingo! Card #" + b);
                     int cardSum = card.sumCardValues();
                     Console.WriteLine("Sum of all card numbers not called: " + cardSum);
                     Console.WriteLine("Winning board score: " + (cardSum) + " x " + called + " = " + (cardSum * called));
-                    //Environment.Exit(0);
 
                     winningCards.Add(b);
                     winningNumbers.Add(called);
@@ -169,7 +173,6 @@ class Day4 : AocDay
             }
             numCalled++;
         }
-
     }
     public override void RunPartB()
     {
