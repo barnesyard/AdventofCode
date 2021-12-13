@@ -1,59 +1,76 @@
-class Day1 : AocDay
+class Day5 : AocDay
 {
+    private string[] input;
+    private List<Line> lines = new List<Line> { };
+
+    private class Line
+    {
+        private int x1;
+        private int x2;
+        private int y1;
+        private int y2;
+        public Line(int x1, int y1, int x2, int y2)
+        {
+            this.x1 = x1;
+            this.y1 = y1;
+            this.x2 = x2;
+            this.y2 = y2;
+        }
+
+        public int X1 { get { return this.x1; } }
+        public int Y1 { get { return this.y1; } }
+        public int X2 { get { return this.x2; } }
+        public int Y2 { get { return this.y2; } }
+    }
+
+    public Day5()
+    {
+        //Load the input
+        this.input = System.IO.File.ReadAllLines(@".\input\Day5_Input.txt");
+        //Store input a lines 
+        foreach (string line in this.input)
+        {
+            int x1, x2, y1, y2;
+
+            x1 = int.Parse(line.Replace(" -> ", ",").Split(",", 4)[0]);
+            y1 = int.Parse(line.Replace(" -> ", ",").Split(",", 4)[1]);
+            x2 = int.Parse(line.Replace(" -> ", ",").Split(",", 4)[2]);
+            y2 = int.Parse(line.Replace(" -> ", ",").Split(",", 4)[3]);
+
+            this.lines.Add(new Line(x1, y1, x2, y2));
+        }
+        Console.WriteLine("Stored " + this.lines.Count + " lines");
+    }
+
     public override void RunPartA()
     {
-        Console.WriteLine("Running Day 1 part A");
-        string[] input = System.IO.File.ReadAllLines(@"E:\OneDrive\Code Projects\AdventOfCode\AOC2021\input\Day1A_Input.txt");
+        Console.WriteLine("Running Day 5 part A");
 
-        int index = 0;
-        int prevValue = 0;
-
-        //part A
-        foreach (string value in input)
+        //loop over each line
+        //how many lines are horiz or vert?
+        int hOrVLines = 0;
+        foreach (Line line in this.lines)
         {
-            if (0 == prevValue)
+            //if the line is not vert or horiz skip it
+            if (line.X1 != line.X2 && line.Y1 != line.Y2)
             {
-                prevValue = int.Parse(value);
                 continue;
             }
-            if (int.Parse(value) > prevValue)
-            {
-                index++;
-            }
-            string tempStr = "Part A Number of increases in depth measurements-----> " + value + " <----- (This is the index: " + index + ")";
-            Console.WriteLine(tempStr);
-            prevValue = int.Parse(value);
+            Console.Write("Number of hor or ver lines: " + (hOrVLines++) + " in the list \r");
+            Thread.Sleep(5);
         }
+        Console.WriteLine();
     }
     public override void RunPartB()
     {
-        Console.WriteLine("Running Day 1 part B");
-        string[] input = System.IO.File.ReadAllLines(@"E:\OneDrive\Code Projects\AdventOfCode\AOC2021\input\Day1A_Input.txt");
-
-        int prev1 = int.Parse(input[0]);
-        int prev2 = int.Parse(input[1]);
-        int prev3 = int.Parse(input[2]);
-        int sum1 = prev1 + prev2 + prev3;
-        int sum2 = 0;
-        int day2increase = 0;
-        Console.WriteLine(input.Length);
-        for (int a = 3; a < input.Length; a++)
-        {
-            sum2 = int.Parse(input[a]) + int.Parse(input[a - 1]) + int.Parse(input[a - 2]);
-            if (sum2 > sum1)
-            {
-                day2increase++;
-            }
-            Console.WriteLine("Index: " + a + "  Win1 " + input[a - 3] + " " + input[a - 2] + " " + input[a - 1] + "  Win2 " + input[a - 2] + " " + input[a - 1] + " " + input[a] + "  Count of increases: " + day2increase);
-            sum1 = sum2;
-        }
+        Console.WriteLine("Running Day 5 part B");
     }
 }
 
-class Day1Factory : AocDayFactory
+class Day5Factory : AocDayFactory
 {
     public override AocDay GetAocDay()
     {
-        return new Day1();
+        return new Day5();
     }
 }

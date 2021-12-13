@@ -7,7 +7,7 @@ AocDayFactory factory;
 
 //Console.Write("Input AOC Day to run: ");
 //var inputDay = Console.ReadLine();
-var inputDay = "4";
+var inputDay = "5";
 
 string inputDayStr = "1";
 if(inputDay == null)
