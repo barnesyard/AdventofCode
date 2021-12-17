@@ -72,13 +72,13 @@ class Day4 : AocDay
                 for (int j = 0; j < 5; j++)
                 {
                     // do we have a row of called numbers for this bingo card?
-                    if (true == this.called[i, j])
+                    if (this.called[i, j])
                     {
                         rowCovered++;
                         if (5 == rowCovered) { this.hasBingo = true; return true; }
                     }
                     // do we have a column of called numbers?
-                    if (true == this.called[j, i])
+                    if (this.called[j, i])
                     {
                         colCovered++;
                         if (5 == colCovered) { this.hasBingo = true; return true; }
