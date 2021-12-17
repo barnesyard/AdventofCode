@@ -6,11 +6,12 @@ class Day3 : AocDay
 
     public Day3()
     {
-        this.input = System.IO.File.ReadAllLines(@"E:\OneDrive\Code Projects\AdventOfCode\AOC2021\input\Day3_Input.txt");
+        this.input = System.IO.File.ReadAllLines(@".\input\Day3_Input.txt");
     }
 
-    public override void RunPartA()
+    public override void SolveDay()
     {
+        Console.WriteLine("Getting the solution to Day 3 ");
         Console.WriteLine("Running Day 3 part A");
 
         // count the number of 1s in each column
@@ -60,9 +61,8 @@ class Day3 : AocDay
         Console.WriteLine("The gamma binary string: " + gammaBinary + " Converted to decimal: " + gamma);
         Console.WriteLine("The epsilon binary string: " + epsilonBinary + " Converted to decimal: " + epsilon);
         Console.WriteLine("Final power consumption: " + (gamma * epsilon));
-    }
-    public override void RunPartB()
-    {
+
+        // Time to solve part B
         Console.WriteLine("Running Day 4 part B");
 
         this.mostCom = new List<string>(this.input);

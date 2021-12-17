@@ -136,10 +136,10 @@ class Day4 : AocDay
         Console.WriteLine(this.BingoCards.Count + " bingo cards added!");
 
     }
-
-    public override void RunPartA()
+    
+    public override void SolveDay()
     {
-        Console.WriteLine("Running Day 4 part A");
+        Console.WriteLine("Getting the solution to Day 4");
         Console.WriteLine("Let's start calling numbers!");
 
         int numCalled = 0;
@@ -174,10 +174,7 @@ class Day4 : AocDay
             numCalled++;
         }
     }
-    public override void RunPartB()
-    {
-        Console.WriteLine("Running Day 4 part B");
-    }
+
 }
 
 class Day4Factory : AocDayFactory

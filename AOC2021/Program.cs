@@ -25,13 +25,11 @@ var constructorInfo = factoryType.GetConstructor(BindingFlags.Public | BindingFl
 factory = (AocDayFactory)constructorInfo!.Invoke(null);
 
 AocDay aocDay = factory.GetAocDay();
-aocDay.RunPartA();
-//aocDay.RunPartB();
+aocDay.SolveDay();
 
 abstract class AocDay
 {
-    public abstract void RunPartA();
-    public abstract void RunPartB();
+    public abstract void SolveDay();
 }
 
 abstract class AocDayFactory

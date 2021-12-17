@@ -52,9 +52,9 @@ class Day5 : AocDay
 
     }
 
-    public override void RunPartA()
+    public override void SolveDay()
     {
-        Console.WriteLine("Running Day 5 part A");
+        Console.WriteLine("Getting the solution to Day 5 ");
 
         //loop over each line
         foreach (Line line in this.lines)
@@ -97,10 +97,8 @@ class Day5 : AocDay
         Console.WriteLine("The number of overlapping grid points part 1: " + overlapCount1);
         Console.WriteLine("The number of overlapping grid points part 2: " + overlapCount2);
     }
-    public override void RunPartB()
-    {
-        Console.WriteLine("Running Day 5 part B");
-    }
+
+
 }
 
 class Day5Factory : AocDayFactory

@@ -9,14 +9,12 @@ class Day6 : AocDay
         this.input = System.IO.File.ReadAllLines(@".\input\Day6_Input.txt");
     }
 
-    public override void RunPartA()
+    public override void SolveDay()
     {
-        Console.WriteLine("Running Day 6 part A");
+        Console.WriteLine("Getting the solution to Day 6 ");
     }
-    public override void RunPartB()
-    {
-        Console.WriteLine("Running Day 5 part B");
-    }
+
+
 }
 
 class Day6Factory : AocDayFactory
