@@ -41,11 +41,7 @@ class Day5 : AocDay
         Console.WriteLine("Stored " + this.lines.Count + " lines");
 
         //search through all the lines and find the largest value for x or y point and use that to set size of grid array
-        int gridSize = 0;
-        foreach (Line oneLine in this.lines)
-        {
-            gridSize = oneLine.MaxPoint > gridSize ? oneLine.MaxPoint : gridSize;
-        }
+        int gridSize = this.lines.Max(line => line.MaxPoint);
 
         grid1 = new int[gridSize + 1, gridSize + 1];
         grid2 = new int[gridSize + 1, gridSize + 1];
