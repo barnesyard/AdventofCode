@@ -15,10 +15,10 @@ class Day8 : AocDay
             this.OutputValues = inputValues;
 
             // First set the digits we know based on the fact they have a unique count of segments
-            this.digits[1] = this.SignalPatterns.Where(sig => sig.Length == 2).ToList()[0];
-            this.digits[4] = this.SignalPatterns.Where(sig => sig.Length == 4).ToList()[0];
-            this.digits[7] = this.SignalPatterns.Where(sig => sig.Length == 3).ToList()[0];
-            this.digits[8] = this.SignalPatterns.Where(sig => sig.Length == 7).ToList()[0];
+            this.digits[1] = this.SignalPatterns.First(sig => sig.Length == 2);
+            this.digits[4] = this.SignalPatterns.First(sig => sig.Length == 4);
+            this.digits[7] = this.SignalPatterns.First(sig => sig.Length == 3);
+            this.digits[8] = this.SignalPatterns.First(sig => sig.Length == 7);
 
             // Set "digit 6" based on its 6 segments and doesn't have both of 1's segments
             // The segment it doesn't have is the top right segment which will distinguish the 5 from the 2 so save it
