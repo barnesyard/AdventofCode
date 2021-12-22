@@ -21,15 +21,32 @@ class Day9 : AocDay
         }
     }
 
+    private bool isLowPt(int r, int c)
+    {
+        bool checkLeft = c == 0 ? true : (htGrid[r, c] < htGrid[r, c - 1]);
+        bool checkRight = c == gridWidth - 1 ? true : (htGrid[r, c] < htGrid[r, c + 1]);
+        bool checkUp = r == 0 ? true : (htGrid[r, c] < htGrid[r - 1, c]);
+        bool checkDown = r == gridHeight - 1 ? true : (htGrid[r, c] < htGrid[r + 1, c]);
+
+        if (checkLeft && checkRight && checkUp && checkDown)
+        {
+            return true;
+        }
+        return false;
+
+    }
+
     public override void SolveDay()
     {
         Console.WriteLine("Getting the solution to Day 9");
         int lowPointsSum = 0;
+        int altLowPointSum = 0;
         for (int r = 0; r < gridHeight; r++)
         {
             Console.ForegroundColor = ConsoleColor.White;
             for (int c = 0; c < gridWidth; c++)
             {
+                if (isLowPt(r, c)) { altLowPointSum += htGrid[r, c] + 1; }
                 bool isLow = false;
                 if (r == 0)
                 {
@@ -123,6 +140,7 @@ class Day9 : AocDay
         }
         Console.ResetColor();
         Console.WriteLine("Sum of low point risk: " + lowPointsSum);
+        Console.WriteLine("Alt sum of low point risk: " + altLowPointSum);
     }
 
 }
