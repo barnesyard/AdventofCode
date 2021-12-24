@@ -4,6 +4,7 @@ class Day9 : AocDay
     private int[,] htGrid;
     private int gridWidth;
     private int gridHeight;
+    private List<int> basinSizes = new List<int> { };
 
     public Day9()
     {
@@ -36,101 +37,36 @@ class Day9 : AocDay
 
     }
 
+    private int getBasinSize(int r, int c)
+    {
+        // if the left point is less than 9 it adds 1 to our basin size
+        int checkLeft = (c != 0) && (htGrid[r, c - 1] < 9) ? getBasinSize(r, c - 1) + 1 : 0;
+        return 1;
+    }
+
     public override void SolveDay()
     {
         Console.WriteLine("Getting the solution to Day 9");
+
+        // Track the sum of the risk level of each low point as you find them
         int lowPointsSum = 0;
-        int altLowPointSum = 0;
+
+        //loop over the entire grid of elevations
         for (int r = 0; r < gridHeight; r++)
         {
             Console.ForegroundColor = ConsoleColor.White;
             for (int c = 0; c < gridWidth; c++)
             {
-                if (isLowPt(r, c)) { altLowPointSum += htGrid[r, c] + 1; }
+                // at each point call a method to figure out if it is a low point
                 bool isLow = false;
-                if (r == 0)
+                if (isLowPt(r, c))
                 {
-                    if (c == 0)
-                    {
-                        if ((htGrid[r, c] < htGrid[r, c + 1]) && (htGrid[r, c] < htGrid[r + 1, c]))
-                        {
-                            lowPointsSum += (htGrid[r, c] + 1);
-                            isLow = true;
-                        }
-                    }
-                    else if (c == this.gridWidth - 1)
-                    {
-                        if ((htGrid[r, c] < htGrid[r, c - 1]) && (htGrid[r, c] < htGrid[r + 1, c]))
-                        {
-                            lowPointsSum += (htGrid[r, c] + 1);
-                            isLow = true;
-                        }
-                    }
-                    else
-                    {
-                        if ((htGrid[r, c] < htGrid[r, c - 1]) && (htGrid[r, c] < htGrid[r, c + 1]) && (htGrid[r, c] < htGrid[r + 1, c]))
-                        {
-                            lowPointsSum += (htGrid[r, c] + 1);
-                            isLow = true;
-                        }
+                    lowPointsSum += htGrid[r, c] + 1;
+                    isLow = true;
 
-                    }
-                }
-                else if (r == this.gridHeight - 1)
-                {
-                    if (c == 0)
-                    {
-                        if ((htGrid[r, c] < htGrid[r, c + 1]) && (htGrid[r, c] < htGrid[r - 1, c]))
-                        {
-                            lowPointsSum += (htGrid[r, c] + 1);
-                            isLow = true;
-                        }
-                    }
-                    else if (c == this.gridWidth - 1)
-                    {
-                        if ((htGrid[r, c] < htGrid[r, c - 1]) && (htGrid[r, c] < htGrid[r - 1, c]))
-                        {
-                            lowPointsSum += (htGrid[r, c] + 1);
-                            isLow = true;
-                        }
-                    }
-                    else
-                    {
-                        if ((htGrid[r, c] < htGrid[r, c - 1]) && (htGrid[r, c] < htGrid[r, c + 1]) && (htGrid[r, c] < htGrid[r - 1, c]))
-                        {
-                            lowPointsSum += (htGrid[r, c] + 1);
-                            isLow = true;
-                        }
-                    }
-
-                }
-                else
-                {
-                    if (c == 0)
-                    {
-                        if ((htGrid[r, c] < htGrid[r, c + 1]) && (htGrid[r, c] < htGrid[r - 1, c]) && (htGrid[r, c] < htGrid[r + 1, c]))
-                        {
-                            lowPointsSum += (htGrid[r, c] + 1);
-                            isLow = true;
-                        }
-                    }
-                    else if (c == this.gridWidth - 1)
-                    {
-                        if ((htGrid[r, c] < htGrid[r, c - 1]) && (htGrid[r, c] < htGrid[r + 1, c]) && (htGrid[r, c] < htGrid[r - 1, c]))
-                        {
-                            lowPointsSum += (htGrid[r, c] + 1);
-                            isLow = true;
-                        }
-                    }
-                    else
-                    {
-                        if ((htGrid[r, c] < htGrid[r, c - 1]) && (htGrid[r, c] < htGrid[r, c + 1]) &&
-                            (htGrid[r, c] < htGrid[r - 1, c]) && (htGrid[r, c] < htGrid[r + 1, c]))
-                        {
-                            lowPointsSum += (htGrid[r, c] + 1);
-                            isLow = true;
-                        }
-                    }
+                    // find the size of the basin
+                    int basinSize = 1 + this.getBasinSize(r, c);
+                    this.basinSizes.Add(basinSize);
                 }
                 if (isLow) { Console.ForegroundColor = ConsoleColor.Red; }
                 else { Console.ForegroundColor = ConsoleColor.White; }
@@ -140,7 +76,6 @@ class Day9 : AocDay
         }
         Console.ResetColor();
         Console.WriteLine("Sum of low point risk: " + lowPointsSum);
-        Console.WriteLine("Alt sum of low point risk: " + altLowPointSum);
     }
 
 }
