@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Added by Troy for his local computer setup, don't include the folder where I store AoC data
+AOCData
+
 # User-specific files
 *.rsuser
 *.suo

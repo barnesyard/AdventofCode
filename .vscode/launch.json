@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "C#: AOC2024 Debug",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/AOC2024/AOC2024.csproj"
+        },
+        {
+            "name": "C#: AOC2019UI",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}\\AOC2019UI\\AOC2019UI.csproj",
+            "launchConfigurationId": "TargetFramework=;AOC2019UI"
+        }
+    ]
+}
