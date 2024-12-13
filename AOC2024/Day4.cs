@@ -58,6 +58,7 @@ class Day4 : AocDay
 
             return false;
         }
+
         int findXmasAllDirs(int row, int col)
         {
             // create a list of directions to search so we can loop over them
@@ -77,47 +78,6 @@ class Day4 : AocDay
             {
                 if(xmasFound(row, col, dir[0], dir[1])) numXmasFound++; 
             }
-
-            // // search up
-            // if (row >= 3 &&
-            // this.wordSearchRows[row - 1][col] == 'M' &&
-            // this.wordSearchRows[row - 2][col] == 'A' &&
-            // this.wordSearchRows[row - 3][col] == 'S') numXmasFound++;
-            // // search up & left
-            // if (row >= 3 && col >= 3 &&
-            // this.wordSearchRows[row - 1][col - 1] == 'M' &&
-            // this.wordSearchRows[row - 2][col - 2] == 'A' &&
-            // this.wordSearchRows[row - 3][col - 3] == 'S') numXmasFound++;
-            // // search left
-            // if (col >= 3 &&
-            // this.wordSearchRows[row][col - 1] == 'M' &&
-            // this.wordSearchRows[row][col - 2] == 'A' &&
-            // this.wordSearchRows[row][col - 3] == 'S') numXmasFound++;
-            // // search down & left
-            // if (row < this.gridHeight - 3 && col >= 3 &&
-            // this.wordSearchRows[row + 1][col - 1] == 'M' &&
-            // this.wordSearchRows[row + 2][col - 2] == 'A' &&
-            // this.wordSearchRows[row + 3][col - 3] == 'S') numXmasFound++;
-            // // search down
-            // if (row < this.gridHeight - 3 &&
-            // this.wordSearchRows[row + 1][col] == 'M' &&
-            // this.wordSearchRows[row + 2][col] == 'A' &&
-            // this.wordSearchRows[row + 3][col] == 'S') numXmasFound++;
-            // // search down & right
-            // if (row < this.gridHeight - 3 && col < this.gridWidth - 3 &&
-            // this.wordSearchRows[row + 1][col + 1] == 'M' &&
-            // this.wordSearchRows[row + 2][col + 2] == 'A' &&
-            // this.wordSearchRows[row + 3][col + 3] == 'S') numXmasFound++;
-            // // search right
-            // if (col < this.gridWidth - 3 &&
-            // this.wordSearchRows[row][col + 1] == 'M' &&
-            // this.wordSearchRows[row][col + 2] == 'A' &&
-            // this.wordSearchRows[row][col + 3] == 'S') numXmasFound++;
-            // // search up & right
-            // if (row >= 3 && col < this.gridWidth - 3 &&
-            // this.wordSearchRows[row - 1][col + 1] == 'M' &&
-            // this.wordSearchRows[row - 2][col + 2] == 'A' &&
-            // this.wordSearchRows[row - 3][col + 3] == 'S') numXmasFound++;
             return numXmasFound;
         }
 
@@ -142,19 +102,18 @@ class Day4 : AocDay
         {
             int numMasXFound = 0;
             if (
-                //row >= 1 && col >= 1 && row < this.gridHeight - 1 && col < this.gridWidth - 1 &&
-            (
-                (this.wordSearchRows[row - 1][col - 1] == 'M' &&
-                this.wordSearchRows[row + 1][col + 1] == 'S') ||
-                (this.wordSearchRows[row - 1][col - 1] == 'S' &&
-                this.wordSearchRows[row + 1][col + 1] == 'M')
-            ) &&
-            (
-                (this.wordSearchRows[row - 1][col + 1] == 'M' &&
-                this.wordSearchRows[row + 1][col - 1] == 'S') ||
-                (this.wordSearchRows[row - 1][col + 1] == 'S' &&
-                this.wordSearchRows[row + 1][col - 1] == 'M')
-            )
+                (
+                    (this.wordSearchRows[row - 1][col - 1] == 'M' &&
+                    this.wordSearchRows[row + 1][col + 1] == 'S') ||
+                    (this.wordSearchRows[row - 1][col - 1] == 'S' &&
+                    this.wordSearchRows[row + 1][col + 1] == 'M')
+                ) &&
+                (
+                    (this.wordSearchRows[row - 1][col + 1] == 'M' &&
+                    this.wordSearchRows[row + 1][col - 1] == 'S') ||
+                    (this.wordSearchRows[row - 1][col + 1] == 'S' &&
+                    this.wordSearchRows[row + 1][col - 1] == 'M')
+                )
             ) numMasXFound++;
             return numMasXFound;
         }

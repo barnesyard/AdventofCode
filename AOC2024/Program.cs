@@ -8,7 +8,7 @@ AocDayFactory factory;
 
 //Console.Write("Input AOC Day to run: ");
 //var inputDay = Console.ReadLine();
-var inputDay = "4";
+var inputDay = "5";
 
 string inputDayStr = "1";
 if (inputDay == null)
@@ -39,7 +39,7 @@ abstract class AocDay
     public int day;
     public string input;
 
-    public AocDay (int day)
+    public AocDay(int day)
     {
         this.day = day;
         this.input = GetInput(day, year);
@@ -64,11 +64,10 @@ abstract class AocDay
         if (!File.Exists(pathToDayData))
         {
             // Since I need the data to work on the puzzle I am forcing this async method to run synchronously
-           SaveDataToFileAsync(year, day, pathToDayData).GetAwaiter().GetResult();
+            // There were many ways to block execution on the async task, this approach will still throw exceptions
+            SaveDataToFileAsync(year, day, pathToDayData).GetAwaiter().GetResult();
         }
-        // Eventually we want to return a string here with the data in the file
-        string retVal = File.ReadAllText(pathToDayData);
-        return retVal;
+        return File.ReadAllText(pathToDayData);
     }
 
     /// <summary>
